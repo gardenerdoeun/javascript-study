@@ -1,0 +1,67 @@
+<script>
+const array1 = [];
+const array2 = [1, 2, 3];
+
+//중요 배열 CRUD
+
+// 배열 Create
+// array1.push(1);
+// array1.push('2');
+// array1.push('삼');
+
+// 배열 Read
+// array1[0];
+// const a1 = array1[0];
+// const a2 = array1[1];
+// const a3 = array1[2];
+
+// // 배열 Update
+// array1[0] = undefined;
+// array1[1] = false;
+// array1[2] = [4, 5, 6, 7];
+
+// // 배열 Delete
+// array1.splice(0, 1);
+// array1.splice(1, 1);
+// array1.splice(2, 1); // splice 에러가 안난다
+
+// const length1 = array1.length;
+// const length2 = array2.length;
+// const lastIndex = array2.length - 1; //마지막인덱스 접근하는 방법
+// const lastValue = array2[lastIndex];
+
+// let arr1 = [];
+// let arr2 = [];
+// // quiz1
+// if (arr1) {
+//   const result = '참';
+//   console.log(result);
+// } else {
+//   const result = '거짓';
+//   console.log(result);
+// }
+// const quiz2 = arr1 === arr2;
+// const quiz3 = arr1[5];
+// // quiz4
+// arr1[9] = 10; 
+
+
+// console.log([1, 2, 3]); // 익명배열 재사용 불가능
+
+const testArray1 = [1, 2, 3, 4, 5];
+let total1 = testArray1[0];
+total1 = total1 + testArray1[1];
+total1 = total1 + testArray1[2];
+total1 += testArray1[3];
+total1 += testArray1[4]; 
+const avg = total1 / testArray1.length;
+
+const odd1 = testArray1[0] + testArray1[2] + testArray1[4];
+const even1 = testArray1[1] + testArray1[3];
+// testArray1.splice(0, 1);
+// testArray1.splice(1, 1);
+// testArray1.splice(2, 1);
+
+testArray1.splice(1,1);
+testArray1.splice(2,1);
+</script>
