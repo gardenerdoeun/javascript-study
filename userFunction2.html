@@ -1,0 +1,29 @@
+<script>
+    //배열 선언
+    const users = [];
+
+    // Create
+    const usersCreate = function(user){
+        users.push(user);
+
+        return 'Created';
+    }
+
+    // Read
+    const usersRead = function(){
+        return users;
+    }
+
+    // Delete
+    const usersDelete = function(index){
+        users.splice(index, 1);
+        return 'Deleted';
+        }
+
+    // Update
+    const usersUpdate = function(index, user){
+        users[index] = user;
+
+        return 'Updated';
+    }
+</script>
