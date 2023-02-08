@@ -1,0 +1,40 @@
+<script>
+// const func1 = function(parameter1, parameter2) {
+// const sum1 = parameter1 + parameter2;
+// return sum1;
+// };
+// const returned1 = func1('argument1', 'argument2');
+
+// const func1 = function(){
+//     const f1 = console.log('함수 호출');
+// };
+// func1();
+
+// const scriptConst2 = 'a';
+// const func2 = function(parameter1) {
+//   const compare1 = scriptConst2 === parameter1;
+//   parameter1 = 'b';
+//   const compare2 = scriptConst2 === parameter1;
+// };
+// func2(scriptConst2);
+
+// const scriptConst3 = [];
+// const func3 = function(parameter1) {
+//   const compare1 = scriptConst3 === parameter1;
+//   parameter1.push('a');
+//   scriptConst3.push('b');
+//   const compare2 = scriptConst3 === parameter1;
+// };
+// func3(scriptConst3);
+// 같은 메모리주소에 값이 들어간다 그래서 true;
+
+const func5 = function(parameter1) {
+    console.log('f5함수 호출');
+    parameter1();
+};
+
+func5(function() {
+  console.log('익명함수 호출');
+});
+
+</script>
