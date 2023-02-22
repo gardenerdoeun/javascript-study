@@ -1,0 +1,22 @@
+<script>
+// var v1 = 'a';
+// v2 = 'b';
+// const condition1 = v1 === window.v1;
+// const condition2 = v2 === window.v2;  
+// var을 쓰지말아야하는이유:글로벌객체를 덮어씌워서 사용하지못하게 하기에 안된다
+
+// const condition3 = f1 === window.f1;
+// function f1() {} //스크립트 실행보다 실행 순서가 높다 뒤에 놔도 먼저 실행된다(최상단)
+
+// if (window.confirm('진행 하시겠습니까?')) {
+//   window.console.log('진행');
+// } else {
+//   window.alert('멈춤');
+// }
+const string1 = '[1, 2, 3]';
+const array1 = JSON.parse(string1);
+const string2 = JSON.stringify(array1);
+
+JSON.stringify([{"abc": 123}], null, 2);
+console.log(JSON.stringify([{"abc": 123}], null, 2));
+</script>
