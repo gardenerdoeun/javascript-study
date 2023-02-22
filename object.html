@@ -1,0 +1,89 @@
+<script>
+const object1 = {};
+const object2 = {
+  key1: '값1',
+  key2: [1, 2, 3],
+  key3: function() {
+    console.log(this.key2);
+    return this;
+  },
+  key4: {
+    k1: 'v1',
+    k2: 'v2'
+  }
+};
+
+
+
+// // 오브젝트 Create
+// object1.key1 = 1;
+// object1.key2 = '2';
+// object1['key3'] = '삼';
+
+// // 오브젝트 Read (. 연산자, 대괄호 연산자)
+// object1.key1;
+// const o1 = object1.key1;
+// const o2 = object1['key2'];
+// const o3 = object1.key3;
+
+// // 오브젝트 Update
+// object1['key1'] = [];
+// object1.key2 = function() {};
+// object1.key3 = {
+//   k1: 'v1',
+//   k2: 'v2'
+// };
+
+// // 오브젝트 Delete
+// delete object1.key1;
+// delete object1.key2;
+// delete object1['key3'];
+
+//delete object1.abc -> 무조건 true
+
+// for (const c1 in object2) {
+//   const value1 = object2[c1];
+//   console.log(c1);
+//   console.log(value1);
+//   console.log(object2.c1); 
+//   //<- undefined 스코프달라서
+// }
+
+// const array2 = Object.keys(object2);
+// console.log(array2.length);
+
+// for in은 array일 경우 변수명, object일 경우 index번호을 받는다
+// for (const c1 in object2) {
+//   const value1 = object2[c1];
+//   console.log(c1);
+//   console.log(value1);
+//   console.log(object2.c1); 
+// }
+
+// for of은 키값을 받는다
+// for (const c1 of object2) {
+//   const value1 = object2[c1];
+//   console.log(c1);
+//   console.log(value1);
+//   console.log(object2.c1); 
+// }
+
+const chain1 = {
+  total: 0,
+  plus1: function() {
+    this.total += 1;
+    return this;
+  },
+  plus10: function() {
+    this.total += 10;
+    return this;
+  },
+  plus: function(num) {
+    this.total += num;
+    return this;
+  }
+};
+// console.log(chain1.plus1().plus10().plus(16));
+console.log(chain1.plus1().plus1().plus10().plus10().plus(6).plus(-1));
+
+</script>
