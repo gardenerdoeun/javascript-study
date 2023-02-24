@@ -13,10 +13,44 @@
 // } else {
 //   window.alert('멈춤');
 // }
-const string1 = '[1, 2, 3]';
-const array1 = JSON.parse(string1);
-const string2 = JSON.stringify(array1);
+// const string1 = '[1, 2, 3]';
+// const array1 = JSON.parse(string1);
+// const string2 = JSON.stringify(array1);
 
-JSON.stringify([{"abc": 123}], null, 2);
-console.log(JSON.stringify([{"abc": 123}], null, 2));
+// JSON.stringify([{"abc": 123}], null, 2);
+// console.log(JSON.stringify([{"abc": 123}], null, 2));
+
+// // storageGet Create
+// localStorage.setItem('ss1', 1);
+// localStorage.setItem('ss2', '이');
+// localStorage.setItem('ss3', undefined);
+// // 무조건 문자로 들어간다
+
+// // storageGet Read
+// localStorage.getItem('ss1');
+// const ss1 = localStorage.getItem('ss1');
+// const ss2 = localStorage.getItem('ss2');
+// const ss3 = localStorage.getItem('ss3');
+
+// // storageGet Update
+// localStorage.setItem('ss1', [1, 2, 3]);
+// localStorage.setItem('ss2', {
+//   key1: 'value1'
+// });
+// localStorage.setItem('ss3', function() {});
+
+// // storageGet Delete
+// localStorage.removeItem('ss1');
+// localStorage.clear();
+
+//localStorage는 팝업창 사용할때 좋다, 도메인마다 고유의 값을 가지고 있다
+
+const storageGet = sessionStorage.getItem('array2');
+const storageLogical = storageGet || '[1, 2, 3]'; // || 앞에가 거짓이면 뒤에 값을 가져온다
+const array2 = JSON.parse(storageLogical);
+const plus1 = array2.length + 1;
+array2.push(plus1);
+const storageSet = JSON.stringify(array2);
+sessionStorage.setItem('array2', storageSet);
+
 </script>
