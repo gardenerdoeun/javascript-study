@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>
+    console.time('index1.js');
+    console.time('index2.js');
+    console.time('index3.js');
+    console.time('html bottom');
+    </script>
+    <script defer src="./index1.js"></script> <!-- 화면(html)이 모두 로딩된 후에 js파일을 읽는다. 파일부를때만 적용이 된다 -->
+    <script src="./index2.js"></script>
+    <script src="./index3.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+</html>
+<script>
+  // debugger;
+  console.timeEnd('html bottom');
+</script>
