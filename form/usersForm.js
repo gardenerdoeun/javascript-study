@@ -30,9 +30,10 @@ const usersCreate = function(user) {
 };
 
 const usersRead = function(){
-    for (let index in users){
-        document.writeln(users[index]);
-    }
+    const tagPre = document.getElementById('tag-pre');
+for (let index in users) {
+    tagPre.innerHTML += users[index] + '\n';
+}
     return users;
 };
 

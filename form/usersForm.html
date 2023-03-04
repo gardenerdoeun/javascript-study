@@ -1,4 +1,5 @@
-<script src="./usersForm.js"></script>
+<script defer src="./usersForm.js"></script>
+<!-- defer은 html이 다 실행된 후 수행하겠다 -->
 <form onsubmit="debugger; usersSubmit(event, this);">
   <!-- post: 데이터 생성 삭제할때 쓴다 -->
   <!-- get: 데이터 데이터에 영향을 안주고 읽을때 검색할때 쓴다. 기본값이 get이라서 post가 아니면 무조건 get -->
@@ -6,3 +7,5 @@
   <input type="hidden" name="input-hidden" value="숨겨진값">
   <input type="submit" value="전송">
 </form>
+
+<pre id="tag-pre"></pre>
