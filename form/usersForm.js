@@ -1,3 +1,21 @@
+// 주소에 쿼리스트링 받아오기
+const queryString = new URLSearchParams(window.location.search);
+const nameText = queryString.get('input-text');
+
+// html name에 접근
+const inputTextObject = document.getElementsByName('input-text')[0];
+inputTextObject.value= nameText;
+
+// input value 값 넣기
+inputTextObject.value = nameText;
+
+// 주소에 쿼리스트링 배열로 받기
+const inputHiddens = queryString.getAll('input-hidden');
+const inputHidden = inputHiddens[0];
+
+inputTextObject.focus();
+inputTextObject.blur();
+
 // const users = [];
 const usersGet = sessionStorage.getItem('users');
 const usersLogical = usersGet || '[]';
