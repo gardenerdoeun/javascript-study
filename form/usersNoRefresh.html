@@ -3,8 +3,8 @@
 <form onsubmit="event.preventDefault(); usersCreate(this);">
   <!-- post: 데이터 생성 삭제할때 쓴다 -->
   <!-- get: 데이터 데이터에 영향을 안주고 읽을때 검색할때 쓴다. 기본값이 get이라서 post가 아니면 무조건 get -->
-  <input type="text" name="input-text" value="초기값" placeholder="명령을 입력 하세요.">
-  <input type="hidden" name="input-hidden" value="숨겨진값">
+  <input type="text" name="user-name" value="" placeholder="Name">
+  <input type="text" name="user-age" value="" placeholder="Age">
   <input type="submit" value="전송">
 </form>
 
@@ -12,6 +12,7 @@
 <div style="display: none;">
   <div id="tag-div-child">
     <input type="text" name="users-name" value="">
+    <input type="text" name="users-age" value="">
     <button name="users-update" onclick="usersUpdate(index)">Update</button>
     <button name="users-delete" onclick="usersDelete(index)">Delete</button>
   </div>

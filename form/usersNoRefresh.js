@@ -1,10 +1,10 @@
 // 주소에 쿼리스트링 받아오기
 const queryString = new URLSearchParams(window.location.search);
-const nameText = queryString.get('input-text');
+const nameText = queryString.get('user-name');
 
 // html name에 접근
-const inputTextObject = document.getElementsByName('input-text')[0];
-inputTextObject.value= nameText;
+const inputTextObjects = document.getElementsByName('user-name');
+inputTextObject = inputTextObjects[0];
 
 // input value 값 넣기
 inputTextObject.value = nameText;
@@ -30,9 +30,14 @@ const usersSet = function(){
 };
 
 const usersCreate = function(form) {
-    const inputTextObject = form['input-text'];
-    users.push(inputTextObject.value);
-    inputTextObject.value = '';
+    const userNameObject = form['user-name'];
+    const userAgeObject = form['user-age'];
+    users.push({
+      name: userNameObject.value,
+      age: userAgeObject.value
+    });
+    userNameObject.value = '';
+    userAgeObject.value = '';
     usersSet();
     return usersRead();
   };
@@ -46,12 +51,13 @@ const usersCreate = function(form) {
       tagDivParent.appendChild(newDivChild);
 
       const usersNameObject = document.getElementsByName('users-name')[index];
+      const usersAgeObject = document.getElementsByName('users-age')[index];
       const usersUpdateObject = document.getElementsByName('users-update')[index];
       const usersDeleteObject = document.getElementsByName('users-delete')[index];
-      usersNameObject.value = users[index];
+      usersNameObject.value = users[index].name;
+      usersAgeObject.value = users[index].age;
       usersUpdateObject.index = index;
       usersDeleteObject.index = index;
-
     }
     console.log('Read', users);
     return users;
@@ -67,7 +73,11 @@ const usersDelete = function(index) {
 
 const usersUpdate = function(index) {
     const name = document.getElementsByName('users-name')[index].value;
-    users[index] = name;
+    const age = document.getElementsByName('users-age')[index].value;
+    users[index] = {
+      name: name,
+      age: age
+    };
     usersSet();
     return usersRead();
 }
