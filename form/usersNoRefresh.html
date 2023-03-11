@@ -8,4 +8,11 @@
   <input type="submit" value="전송">
 </form>
 
-<pre id="tag-pre"></pre>
+<div id="tag-div-parent"></div>
+<div style="display: none;">
+  <div id="tag-div-child">
+    <input type="text" name="users-name" value="">
+    <button name="users-update" onclick="usersUpdate(index)">Update</button>
+    <button name="users-delete" onclick="usersDelete(index)">Delete</button>
+  </div>
+</div>

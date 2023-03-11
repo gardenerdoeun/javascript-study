@@ -23,20 +23,6 @@ const usersGet = sessionStorage.getItem('users');
 const usersLogical = usersGet || '[]';
 const users = JSON.parse(usersLogical);
 
-const usersSubmit = function(event, form) {
-    const inputTextObject = form['input-text'];
-    try {
-      const evalReturn = eval(inputTextObject.value);
-      // eval은 보안상문제로 쓰면안된다
-      // JSON.parse는 함수호출에 해당되지않기에 eval 대신 쓰면 에러가 뜬다
-      console.log(evalReturn);
-    } catch(error) {
-      console.error(error);
-      alert(error);
-      event.preventDefault();
-    }
-  };
-
 const usersSet = function(){
     const usersSet = JSON.stringify(users);
     sessionStorage.setItem('users', usersSet);
@@ -51,19 +37,25 @@ const usersCreate = function(form) {
     return usersRead();
   };
 
-
-const usersRead = function(){
-    const tagPre = document.getElementById('tag-pre');
-    tagPre.innerHTML = '';
+  const usersRead = function() {
+    const tagDivParent = document.getElementById('tag-div-parent');
+    tagDivParent.innerHTML = '';
+    const tagDivChild = document.getElementById('tag-div-child');
     for (let index in users) {
-      tagPre.innerHTML += '<input type="text" name="users-name" value="' + users[index] + '">';
-      tagPre.innerHTML += '<button onclick="usersDelete(' + index + ')">Delete</button>';
-      tagPre.innerHTML += '<button onclick="usersUpdate(' + index + ')">Update</button>';
-      tagPre.innerHTML += '\n';
+      const newDivChild = tagDivChild.cloneNode(true); //cloneNode 함수는 똑같은 것을 복사하여 메모리에 저장, true는 하위요소까지 복사하겠다, 안쓰면 자신만 복사하겠다.
+      tagDivParent.appendChild(newDivChild);
+
+      const usersNameObject = document.getElementsByName('users-name')[index];
+      const usersUpdateObject = document.getElementsByName('users-update')[index];
+      const usersDeleteObject = document.getElementsByName('users-delete')[index];
+      usersNameObject.value = users[index];
+      usersUpdateObject.index = index;
+      usersDeleteObject.index = index;
+
     }
     console.log('Read', users);
     return users;
-};
+  };
 
 usersRead();
 
