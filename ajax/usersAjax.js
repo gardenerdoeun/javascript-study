@@ -18,10 +18,12 @@ const todoList = 1;
 inputTextObject.focus();
 inputTextObject.blur();
 
-// const users = [];
-const usersGet = sessionStorage.getItem('users');
-const usersLogical = usersGet || '[]';
-const users = JSON.parse(usersLogical);
+let users;
+// // const users = [];
+// const usersGet = sessionStorage.getItem('users');
+// const usersLogical = usersGet || '[]';
+// const users = JSON.parse(usersLogical);
+
 
 const usersSet = function(){
     const usersSet = JSON.stringify(users);
@@ -59,14 +61,16 @@ const usersCreate = function(form) {
   xhrObject.setRequestHeader('Content-Type', 'application/json');
   xhrObject.send(JSON.stringify(user));
 };
-  const usersRead = function() {
+const usersRead = function() {
+  const successFunction = function(xhrObject) {
+    const usersLogical = JSON.parse(xhrObject.responseText);
+    users = usersLogical.users;
     const tagDivParent = document.getElementById('tag-div-parent');
     tagDivParent.innerHTML = '';
     const tagDivChild = document.getElementById('tag-div-child');
     for (let index in users) {
-      const newDivChild = tagDivChild.cloneNode(true); //cloneNode 함수는 똑같은 것을 복사하여 메모리에 저장, true는 하위요소까지 복사하겠다, 안쓰면 자신만 복사하겠다.
+      const newDivChild = tagDivChild.cloneNode(true);
       tagDivParent.appendChild(newDivChild);
-
       const usersNameObject = document.getElementsByName('users-name')[index];
       const usersAgeObject = document.getElementsByName('users-age')[index];
       const usersUpdateObject = document.getElementsByName('users-update')[index];
@@ -77,8 +81,25 @@ const usersCreate = function(form) {
       usersDeleteObject.index = index;
     }
     console.log('Read', users);
-    return users;
   };
+  const xhrObject = new XMLHttpRequest();
+  xhrObject.onreadystatechange = function () {
+    if (xhrObject.readyState !== 4) return;
+    if (xhrObject.status === 200) {
+      successFunction(xhrObject);
+    } else {
+      const error = {
+        status: xhrObject.status,
+        statusText: xhrObject.statusText,
+        responseText: xhrObject.responseText
+      }
+      console.error(error);
+    }
+  };
+  xhrObject.open('GET', 'http://localhost:3100/api/v1/users');
+  xhrObject.setRequestHeader('Content-Type', 'application/json');
+  xhrObject.send();
+};
 
 usersRead();
 
