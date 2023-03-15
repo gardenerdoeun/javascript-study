@@ -23,12 +23,25 @@ let users;
 // const usersGet = sessionStorage.getItem('users');
 // const usersLogical = usersGet || '[]';
 // const users = JSON.parse(usersLogical);
+const ajax = function(method, url, data, callback) {
+  const xhrObject = new XMLHttpRequest();
+  xhrObject.onreadystatechange = function() {
+    if (xhrObject.readyState !== 4) return;
+    if (xhrObject.status === 200) {
+      callback();
+    } else {
+      const error = {
+        status: xhrObject.status,
+        statusText: xhrObject.statusText,
+        responseText: xhrObject.responseText
+      }
+      console.error(error);
+    }
+  };
+  xhrObject.open(method, url);
+  xhrObject.setRequestHeader('Content-Type', 'application/json');
+  xhrObject.send(JSON.stringify(data)); // send()로 보낼때 user의 object는 string 타입을 보냄
 
-
-const usersSet = function(){
-    const usersSet = JSON.stringify(users);
-    sessionStorage.setItem('users', usersSet);
-    // window.location.reload();
 };
 
 const usersCreate = function(form) {
@@ -43,24 +56,8 @@ const usersCreate = function(form) {
     userAgeObject.value = '';
     usersRead();
   }
-  const xhrObject = new XMLHttpRequest();
-  xhrObject.onreadystatechange = function() {
-    if (xhrObject.readyState !== 4) return;
-    if (xhrObject.status === 200) {
-      successFunction();
-    } else {
-      const error = {
-        status: xhrObject.status,
-        statusText: xhrObject.statusText,
-        responseText: xhrObject.responseText
-      }
-      console.error(error);
-    }
-  };
-  xhrObject.open('POST', 'http://localhost:3100/api/v1/users');
-  xhrObject.setRequestHeader('Content-Type', 'application/json');
-  xhrObject.send(JSON.stringify(user)); // send()로 보낼때 user의 object는 string 타입을 보냄
 
+  ajax('POST', 'http://localhost:3100/api/v1/users', user, successFunction);
 };
 const usersRead = function() {
   const successFunction = function(xhrObject) {
