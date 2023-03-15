@@ -59,7 +59,8 @@ const usersCreate = function(form) {
   };
   xhrObject.open('POST', 'http://localhost:3100/api/v1/users');
   xhrObject.setRequestHeader('Content-Type', 'application/json');
-  xhrObject.send(JSON.stringify(user));
+  xhrObject.send(JSON.stringify(user)); // send()로 보낼때 user의 object는 string 타입을 보냄
+
 };
 const usersRead = function() {
   const successFunction = function(xhrObject) {
@@ -125,12 +126,28 @@ const usersDelete = function(index) {
 };
 
 const usersUpdate = function(index) {
-    const name = document.getElementsByName('users-name')[index].value;
-    const age = document.getElementsByName('users-age')[index].value;
-    users[index] = {
-      name: name,
-      age: age
-    };
-    usersSet();
-    return usersRead();
-}
+  const url = 'http://localhost:3100/api/v1/users/' + index;
+  const name = document.getElementsByName('users-name')[index].value;
+  const age = document.getElementsByName('users-age')[index].value;
+  const user = {
+    name: name,
+    age: age
+  };
+  const xhrObject = new XMLHttpRequest();
+  xhrObject.onreadystatechange = function () {
+    if (xhrObject.readyState !== 4) return;
+    if (xhrObject.status === 200) {
+      usersRead();
+    } else {
+      const error = {
+        status: xhrObject.status,
+        statusText: xhrObject.statusText,
+        responseText: xhrObject.responseText
+      }
+      console.error(error);
+    }
+  };
+  xhrObject.open('PATCH', url);
+  xhrObject.setRequestHeader('Content-Type', 'application/json');
+  xhrObject.send(JSON.stringify(user));
+};
