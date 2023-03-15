@@ -104,9 +104,24 @@ const usersRead = function() {
 usersRead();
 
 const usersDelete = function(index) {
-    users.splice(index, 1);
-    usersSet();
-    return usersRead();
+  const url = 'http://localhost:3100/api/v1/users/' + index;
+  const xhrObject = new XMLHttpRequest();
+  xhrObject.onreadystatechange = function () {
+    if (xhrObject.readyState !== 4) return;
+    if (xhrObject.status === 200) {
+      usersRead();
+    } else {
+      const error = {
+        status: xhrObject.status,
+        statusText: xhrObject.statusText,
+        responseText: xhrObject.responseText
+      }
+      console.error(error);
+    }
+  };
+  xhrObject.open('DELETE', url);
+  xhrObject.setRequestHeader('Content-Type', 'application/json');
+  xhrObject.send();
 };
 
 const usersUpdate = function(index) {
