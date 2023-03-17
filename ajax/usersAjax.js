@@ -19,10 +19,7 @@ inputTextObject.focus();
 inputTextObject.blur();
 
 let users;
-// // const users = [];
-// const usersGet = sessionStorage.getItem('users');
-// const usersLogical = usersGet || '[]';
-// const users = JSON.parse(usersLogical);
+
 const ajax = function(method, url, data, callback) {
   const xhrObject = new XMLHttpRequest();
   xhrObject.onreadystatechange = function() {
