@@ -48,16 +48,14 @@ const usersCreate = function(form) {
     name: userNameObject.value,
     age: userAgeObject.value
   };
-  const successFunction = function() {
+  axios.post('http://localhost:3100/api/v1/users', user).then(function() {
     userNameObject.value = '';
     userAgeObject.value = '';
     usersRead();
-  }
-
-  axios.post('http://localhost:3100/api/v1/users', user).then(successFunction);
+  });
 };
 const usersRead = function() {
-  const successFunction = function(response) {
+  axios.get('http://localhost:3100/api/v1/users').then(function(response) {
     const usersLogical = response.data;
     users = usersLogical.users;
     const tagDivParent = document.getElementById('tag-div-parent');
@@ -76,17 +74,17 @@ const usersRead = function() {
       usersDeleteObject.index = index;
     }
     console.log('Read', users);
-  };
-
-  axios.get('http://localhost:3100/api/v1/users').then(successFunction);
+  });
 };
 
 usersRead();
 
 const usersDelete = function(index) {
   const url = 'http://localhost:3100/api/v1/users/' + index;
-   axios.delete(url).then(usersRead);
-  };
+   axios.delete(url).then(function(){
+    usersRead();
+  });
+};
 
 const usersUpdate = function(index) {
   const url = 'http://localhost:3100/api/v1/users/' + index;
@@ -96,6 +94,7 @@ const usersUpdate = function(index) {
     name: name,
     age: age
   };
-
-axios.patch(url, user).then(usersRead);
+  axios.patch(url, user).then(function(){
+    usersRead();
+  });
 };
