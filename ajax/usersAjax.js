@@ -54,11 +54,11 @@ const usersCreate = function(form) {
     usersRead();
   }
 
-  ajax('POST', 'http://localhost:3100/api/v1/users', user, successFunction);
+  axios.post('http://localhost:3100/api/v1/users', user).then(successFunction);
 };
 const usersRead = function() {
-  const successFunction = function(xhrObject) {
-    const usersLogical = JSON.parse(xhrObject.responseText);
+  const successFunction = function(response) {
+    const usersLogical = response.data;
     users = usersLogical.users;
     const tagDivParent = document.getElementById('tag-div-parent');
     tagDivParent.innerHTML = '';
@@ -78,15 +78,14 @@ const usersRead = function() {
     console.log('Read', users);
   };
 
-  ajax('GET', 'http://localhost:3100/api/v1/users', undefined, successFunction);
-
+  axios.get('http://localhost:3100/api/v1/users').then(successFunction);
 };
 
 usersRead();
 
 const usersDelete = function(index) {
   const url = 'http://localhost:3100/api/v1/users/' + index;
-  ajax('DELETE', url, undefined, usersRead);
+   axios.delete(url).then(usersRead);
   };
 
 const usersUpdate = function(index) {
@@ -98,5 +97,5 @@ const usersUpdate = function(index) {
     age: age
   };
 
-  ajax('PATCH', url, user, usersRead);
+axios.patch(url, user).then(usersRead);
 };
